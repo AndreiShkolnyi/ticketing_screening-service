@@ -1,0 +1,20 @@
+services:
+  screening-service:
+    container_name: screening-service
+    image: ticketing/screening-service:dev
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    env_file:
+      - .env.production.local
+    expose:
+      - '9101'
+    volumes:
+      - ../logs/screening:/var/log/services/screening
+    networks:
+      - choncinema
+
+networks:
+  choncinema:
+      external: true
